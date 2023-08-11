@@ -1,8 +1,29 @@
 <template>
-  <div>Login</div>
+  <div>登录页</div>
+  用户id<el-input v-model="userId"></el-input>
+  <el-button @click="login">登录</el-button>
 </template>
 <script>
+import {useRouter
+} from 'vue-router'
+import {ref} from 'vue'
 export default {
-  name: 'LoginComp'
+  name: 'LoginComp',
+  setup() {
+
+    const router = useRouter()
+    function login() {
+      // 跳转到首页
+      router.push({name: 'home', query: {
+        userId: userId.value,
+        username: '张三'
+      }})
+    }
+    const userId = ref('')
+
+    return {
+      login,userId
+    }
+  }
 }
 </script>
