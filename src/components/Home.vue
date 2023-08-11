@@ -1,21 +1,28 @@
 <template>
-  <div>控制台</div>
-  <el-button @click="logout">退出</el-button>
+  <header-comp></header-comp>
+  <div class="body">
+    <nav-comp></nav-comp>
+    <body-comp></body-comp>
+  </div>
 </template>
 <script>
-import {useRouter} from 'vue-router'
+import BodyComp from '@/components/layout/Body.vue'
+import HeaderComp from '@/components/layout/Header.vue'
+import NavComp from '@/components/layout/Nav.vue'
 export default {
   name: 'HomeComp',
-  setup() {
-    const router = useRouter()
-    function logout() {
-      // 跳转到登录页
-      router.push({ name: 'main'})
-    }
-
-    return {
-      logout
-    }
-  }
+  components: {
+    BodyComp,
+    HeaderComp,
+    NavComp
+  },
+  setup() {}
 }
 </script>
+<style scoped>
+.body {
+  height: calc(100% - 5.5rem);
+  width: 100%;
+  display: flex;
+}
+</style>
