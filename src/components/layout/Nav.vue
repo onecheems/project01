@@ -1,15 +1,41 @@
 <template>
   <div class="container">
-    <el-menu class="no-border-right" default-active="2">
-      <el-menu-item index="1">item three</el-menu-item>
-      <el-menu-item index="2">item three</el-menu-item>
+    <el-menu class="no-border-right" :default-active="defaultMenu" router>
+      <el-menu-item v-for="route in menuItemPathRef" :key="route.path" :index="route.path">{{
+        route.text
+      }}</el-menu-item>
     </el-menu>
   </div>
 </template>
 <script>
+import { watch, ref } from 'vue'
+import { useRoute } from 'vue-router'
 export default {
   name: 'NavComp',
-  setup() {}
+  setup() {
+    const route = useRoute()
+    const menuItemPath = [
+      { path: '/home/upload', text: '上传文件' },
+      { path: '/home/myfiles', text: '我的文件' },
+    ]
+    const defaultMenu = ref(menuItemPath[0].path)
+    const menuItemPathRef = ref(menuItemPath)
+    
+    watch(
+      () => route.path,
+      () => {
+        if (menuItemPath.includes(route.path)) {
+          defaultMenu.value = route.path
+        }
+      },
+      { immediate: true }
+    )
+
+    return {
+      defaultMenu,
+      menuItemPathRef
+    }
+  }
 }
 </script>
 <style scoped>

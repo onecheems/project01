@@ -10,13 +10,11 @@ import {ref} from 'vue'
 export default {
   name: 'LoginComp',
   setup() {
-
     const router = useRouter()
     function login() {
       // 跳转到首页
       router.push({name: 'home', query: {
-        userId: userId.value,
-        username: '张三'
+        userId: userId.value || ''
       }})
     }
     const userId = ref('')
