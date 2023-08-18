@@ -1,9 +1,10 @@
 <template>
   <div class="container">
     <el-menu class="no-border-right" :default-active="defaultMenu" router>
-      <el-menu-item v-for="route in menuItemPathRef" :key="route.path" :index="route.path">{{
-        route.text
-      }}</el-menu-item>
+      <el-menu-item v-for="route in menuItemPathRef" 
+      :key="route.path" 
+      :index="route.path">
+      {{route.text}}</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -24,9 +25,16 @@ export default {
     watch(
       () => route.path,
       () => {
-        if (menuItemPath.includes(route.path)) {
-          defaultMenu.value = route.path
-        }
+        menuItemPath.forEach((item)=>{
+            if(item.path==route.path){
+                defaultMenu.value=route.path
+            }
+        })
+        // if (menuItemPath.includes(route.path)) {
+        //   defaultMenu.value = route.path
+        //   console.log(defaultMenu.value);
+        // }
+        // console.log(1111)
       },
       { immediate: true }
     )
